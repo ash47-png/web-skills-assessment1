@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bird Gallery</title>
+  <style>
+    /* Color palettes */
+    :root {
+      --primary-color: #3498db;
+      --secondary-color: #2ecc71;
+      --bg-color: #ecf0f1;
+      --font-color: #2c3e50;
+      --heading-color: #e74c3c;
+    }
+
+    [data-theme="dark"] {
+      --primary-color: #2980b9;
+      --secondary-color: #27ae60;
+      --bg-color: #2c3e50;
+      --font-color: #ecf0f1;
+      --heading-color: #c0392b;
+    }
+
+    /* Base styles */
+    body {
+      background-color: var(--bg-color);
+      color: var(--font-color);
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    h1 {
+      color: var(--heading-color);
+      text-align: center;
+    }
+
+    /* Image container */
+    #image-container {
+      text-align: center;
+      margin: 30px 0;
+      padding: 15px;
+      background-color: rgba(0, 0, 0, 0.05);
+      border-radius: 8px;
+    }
+
+    #bird-img {
+      max-width: 100%;
+      max-height: 400px;
+      border: 3px solid var(--primary-color);
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    #photographer {
+      font-style: italic;
+      margin-top: 10px;
+      color: var(--secondary-color);
+    }
+
+    /* Button styles */
+    .btn-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .bird-btn {
+      padding: 12px 20px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    .bird-btn:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+
+    .bird-btn:active {
+      transform: translateY(1px);
+    }
+
+    #theme-toggle {
+      display: block;
+      margin: 20px auto;
+      padding: 12px 25px;
+      background-color: var(--secondary-color);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bird Gallery</h1>
+  
+  <div id="image-container">
+    <img id="bird-img" src="http://www.outgrabe.net/bird00.jpg" alt="Bird Image">
+    <p id="photographer">Pardalote by fir0002 (CC-by-NC)</p>
+  </div>
+  
+  <div class="btn-container">
+    <button class="bird-btn" onclick="showBird(0)">Pardalote</button>
+    <button class="bird-btn" onclick="showBird(1)">Purple Swamp Hen</button>
+    <button class="bird-btn" onclick="showBird(2)">White-headed Stilt</button>
+    <button class="bird-btn" onclick="showBird(3)">Inland Thornbill</button>
+    <button class="bird-btn" onclick="showBird(4)">Rose Robin</button>
+  </div>
+  
+  <button id="theme-toggle" onclick="toggleTheme()">Toggle Light/Dark Theme</button>
+
+  <script>
+    // Bird data array
+    const birds = [
+      { 
+        img: "http://www.outgrabe.net/bird00.jpg",
+        text: "Pardalote by fir0002 (CC-by-NC)"
+      },
+      { 
+        img: "http://www.outgrabe.net/bird01.jpg",
+        text: "Purple swamp hen by Toby Hudson (CC-by-SA)"
+      },
+      { 
+        img: "http://www.outgrabe.net/bird02.jpg",
+        text: "White-headed Stilt by JJ Harrison (CC-by-SA)"
+      },
+      { 
+        img: "http://www.outgrabe.net/bird03.jpg",
+        text: "Inland Thornbill by Peter Jacobs (CC-by-SA)"
+      },
+      { 
+        img: "http://www.outgrabe.net/bird04.jpg",
+        text: "Rose Robin by JJ Harrison (CC-by-SA)"
+      }
+    ];
+
+    // Set default bird
+    function showBird(index) {
+      document.getElementById('bird-img').src = birds[index].img;
+      document.getElementById('photographer').textContent = birds[index].text;
+    }
+
+    // Toggle between themes
+    function toggleTheme() {
+      const htmlElement = document.documentElement;
+      const currentTheme = htmlElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      htmlElement.setAttribute('data-theme', newTheme);
+      
+      // Update button text
+      const themeBtn = document.getElementById('theme-toggle');
+      themeBtn.textContent = `Toggle ${currentTheme === 'light' ? 'Light' : 'Dark'} Theme`;
+    }
+  </script>
+</body>
+</html>
